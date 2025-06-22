@@ -1,0 +1,25 @@
+.encabezado{
+  padding: 1%;
+  background-image: url('src/assets/img/Header.jpg');
+  color: white;
+  text-align: center;
+  width: 100%;
+}
+.fotopizza{
+  padding: 2%;
+}
+.cardpizzand{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+}
+.cardpizzand1{
+  padding: 1%;
+}
+.pie{
+  padding: 1%;
+  background-color: black;
+  color: white;
+  text-align: center;
+}
