@@ -23,3 +23,10 @@
   color: white;
   text-align: center;
 }
+.formulario{
+  border: 2px solid black;
+  padding: 20px;          
+  margin: 20px auto;      
+  width: 30%;             
+  border-radius: 5px;
+}
