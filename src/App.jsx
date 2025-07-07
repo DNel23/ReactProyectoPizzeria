@@ -1,4 +1,5 @@
 import './App.css'
+import Cart from './components/Cart'
 import Footer from "./components/Footer"
 import Home from "./components/Home"
 import Login from './components/Login'
@@ -10,9 +11,10 @@ function App() {
   return (
     <>
       <Navbar />
-      {/*<Home />*/}
-      {*/<Register />*/}
-      <Login />
+       <Cart />
+      {/*<Home /> */}
+      {/*<Register />*/}
+      {/*<Login />*/}
       <Footer />
     </>
   )

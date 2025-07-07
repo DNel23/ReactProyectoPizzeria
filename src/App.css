@@ -16,6 +16,9 @@
 }
 .cardpizzand1{
   padding: 1%;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
 }
 .pie{
   padding: 1%;
@@ -29,4 +32,23 @@
   margin: 20px auto;      
   width: 30%;             
   border-radius: 5px;
+}
+.listaCompra{
+  list-style-type: none;
+}
+.tdCarrito{
+  width: 6rem;
+}
+.tdCarrito1{
+  width: 2rem;
+}
+.fotopizzacarrito{
+  padding: 2%;
+  height: 7rem;
+  width: 10rem;
+}
+.listaCompra{
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
 }
