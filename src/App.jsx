@@ -4,6 +4,7 @@ import Footer from "./components/Footer"
 import Home from "./components/Home"
 import Login from './components/Login'
 import Navbar from "./components/Navbar"
+import Pizza from './components/Pizza'
 import Register from './components/Register'
 
 function App() {
@@ -11,10 +12,11 @@ function App() {
   return (
     <>
       <Navbar />
-       <Cart />
-      {/*<Home /> */}
+      {/*<Cart />*/}
+      {/*<Home />*/}
       {/*<Register />*/}
       {/*<Login />*/}
+      <Pizza />
       <Footer />
     </>
   )
