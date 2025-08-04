@@ -1,29 +1,33 @@
+import Header from '../components/Header'
+import Cardpizza from '../components/Cardpizza'
+//import {pizzas} from '../assets/js/pizzas'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
-import Cardpizza from './Cardpizza';
 
-const Pizza = () => {
-
-const [pizza, setPizzas] = useState({ ingredients : []})
+const Home = () => {
+const [pizzas, setPizzas] = useState([])
 
   async function getPizzas() {
     try {
-      const { data } = await axios.get('http://localhost:5000/api/pizzas/p001');
+      const { data } = await axios.get('http://localhost:5000/api/pizzas');
       setPizzas(data);
     } catch (error) {
       console.error(error);
     }
   }
-
+  
   useEffect(() => {
     getPizzas()
   }, [])
 
   return (
     <div>
+      <Header />
       <div className="container mt-5">
         <div className="row">
-          <Cardpizza
+          {pizzas.map((pizza) => (
+          <Cardpizza 
+            key={pizza.id}
             desc = {pizza.desc}
             id = {pizza.id}
             img = {pizza.img}
@@ -31,11 +35,11 @@ const [pizza, setPizzas] = useState({ ingredients : []})
             name = {pizza.name}
             price = {pizza.price}
           />
-    
+       ))} 
        </div>
       </div>
     </div>
   )
 }
 
-export default Pizza
+export default Home
