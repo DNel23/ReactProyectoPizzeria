@@ -31,7 +31,7 @@ const Cart = () => {
                       <Button
                         variant="warning"
                         size="sm"
-                        onClick={() => updateQuantity(pizzaCart.id, pizzaCart.count - 1)}
+                        onClick={() => updateQuantity(pizzaCart.id, pizzaCart.quantity - 1)}
                         disabled={pizzaCart.count === 1}
                         className="me-2"
                       >
@@ -45,7 +45,7 @@ const Cart = () => {
                       <Button
                         variant="success"
                         size="sm"
-                        onClick={() => updateQuantity(pizzaCart.id, pizzaCart.count + 1)}
+                        onClick={() => updateQuantity(pizzaCart.id, pizzaCart.quantity + 1)}
                         className="me-2"
                       >
                         +
