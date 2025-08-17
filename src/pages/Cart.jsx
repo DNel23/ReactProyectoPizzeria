@@ -1,30 +1,25 @@
-import React, { useState } from 'react'
-import { pizzaCart } from '../assets/js/pizzas.js'
+import React, { useContext, useState } from 'react'
+import { Button } from "react-bootstrap";
+/*import { pizzaCart } from '../assets/js/pizzas.js'*/
+import { CartContext } from '../context/CartContext.jsx';
+
 
 const Cart = () => {
+   
+    //const [carrito, setCarrito] = useState(pizzaCart);
+    const {cartItems, updateQuantity, removeFromCart} = useContext(CartContext)
 
-    const [carrito, setCarrito] = useState(pizzaCart);
-    let totalPrice = 0
-
-    const agregarPizza = (index) => {
-        const pizzaItems = [...carrito];
-        pizzaItems[index].count += 1;
-        setCarrito(pizzaItems);
-    }
-
-    const eliminaPizza = (index) => {
-        const pizzaItems = [...carrito];
-        pizzaItems[index].count -= 1;
-        setCarrito(pizzaItems);
-    }
+    const total = cartItems
+    .reduce((acc, item) => acc + item.price * item.quantity, 0)
+    .toFixed(2);
 
   return (
     <div className='container mt-5'>
         <h2 className='text-center mb-4'>Detalle del pedido: </h2>
-        {carrito
+        {cartItems
         .map((pizzaCart,index) => {
             if (pizzaCart.count === 0) {
-                return null;
+                <p>El carrito está vacío.</p>
             }
             return (
             <li key={pizzaCart.id} className='listaCompra'>
@@ -40,13 +35,35 @@ const Cart = () => {
                             <h6>$ {pizzaCart.price.toLocaleString('es-CL')}</h6>
                         </td>
                         <td className='tdCarrito1'> 
-                            <button onClick={() => eliminaPizza(index)}> - </button>
+                                <Button
+                                    variant="warning"
+                                    size="sm"
+                                    onClick={() => updateQuantity(pizzaCart.id,pizzaCart.count - 1)}
+                                    disabled={pizzaCart.count === 1}
+                                    className="me-2">
+                                    -
+                                </Button>
                         </td>
                         <td className='tdCarrito1'>
                             {pizzaCart.count}
                         </td>
                         <td className='tdCarrito1'>
-                            <button onClick={() => agregarPizza(index)}> + </button>
+                                <Button
+                                    variant="success"
+                                    size="sm"
+                                    onClick={() => updateQuantity(pizzaCart.id,pizzaCart.count + 1)}
+                                    className="me-2">
+                                    +
+                                </Button>
+                        </td>
+                        <td className='tdCarrito1'>
+                                <Button
+                                    variant="danger"
+                                    size="sm"
+                                    m="2"
+                                    onClick={() => removeFromCart(index)}>
+                                    Eliminar
+                                </Button>
                         </td>
                     </tr>
                 </table>
@@ -54,8 +71,8 @@ const Cart = () => {
             )
             })}
             <div className='text-center mt-5'>
-                <h3>Total : $ {totalPrice=carrito.reduce((acc, pizza) => acc + (pizza.price * pizza.count), 0).toLocaleString('es-CL')}</h3>
-                <button className='btn btn-primary btn-lg mt-3'>Pagar</button>
+                <h3>Total : $ {total.toLocaleString('es-CL')}</h3>
+                <button className='btn btn-primary btn-lg mt-3'>Pagar </button>
             </div>
     </div>
   )

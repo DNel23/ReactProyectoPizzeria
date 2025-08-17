@@ -1,8 +1,13 @@
-import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { Link} from "react-router-dom";
+import { CartContext } from "../context/CartContext";
+import { Badge } from "react-bootstrap";
+import {formattedPrice} from '../assets/js/formatedPrice'
 
 const Navbar = () => {
-  const total = 25000;
-  const token = true;
+  const {getTotalPrice, cartItems} = useContext(CartContext)
+  const TotalPrice=getTotalPrice()
+  const token = false;
 
   return (
     <div>
@@ -21,8 +26,8 @@ const Navbar = () => {
               <Link to="/register" className="btn btn-outline-light mx-2">🔐 Register</Link>
             </>
           )}
-
-          <Link to="/cart" className="btn btn-outline-light mx-2">🛒 Total: ${total.toLocaleString()}</Link>
+          <Badge bg="light" text="dark" className="me-2">{cartItems.length}</Badge>
+          <Link to="/cart" className="btn btn-outline-light mx-2">🛒Total: ${formattedPrice(TotalPrice)}</Link>
         </div>
       </nav>
     </div>
