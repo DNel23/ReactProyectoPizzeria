@@ -1,81 +1,78 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext } from 'react';
 import { Button } from "react-bootstrap";
-/*import { pizzaCart } from '../assets/js/pizzas.js'*/
 import { CartContext } from '../context/CartContext.jsx';
 
-
 const Cart = () => {
-   
-    //const [carrito, setCarrito] = useState(pizzaCart);
-    const {cartItems, updateQuantity, removeFromCart} = useContext(CartContext)
-
-    const total = cartItems
-    .reduce((acc, item) => acc + item.price * item.quantity, 0)
-    .toFixed(2);
-
+  const { cartItems, updateQuantity, removeFromCart, getTotalPrice } = useContext(CartContext);
+  const TotalPriceC=getTotalPrice()
+  
   return (
     <div className='container mt-5'>
-        <h2 className='text-center mb-4'>Detalle del pedido: </h2>
-        {cartItems
-        .map((pizzaCart,index) => {
-            if (pizzaCart.count === 0) {
-                <p>El carrito está vacío.</p>
-            }
-            return (
+      <h2 className='text-center mb-4'>Detalle del pedido:</h2>
+      {cartItems.length === 0 ? (
+        <p>El carrito está vacío.</p>
+      ) : (
+        <ul>
+          {cartItems.map((pizzaCart, index) => (
             <li key={pizzaCart.id} className='listaCompra'>
-                <table className="d-flex align-items-center justify-content-center">
-                    <tr>
-                        <td className='tdCarrito'>
-                            <img className='fotopizzacarrito' src={pizzaCart.img} alt={pizzaCart.name} />
-                        </td>
-                        <td className='tdCarrito'>
-                           <h5>{pizzaCart.name}</h5>
-                        </td>
-                        <td className='tdCarrito'>
-                            <h6>$ {pizzaCart.price.toLocaleString('es-CL')}</h6>
-                        </td>
-                        <td className='tdCarrito1'> 
-                                <Button
-                                    variant="warning"
-                                    size="sm"
-                                    onClick={() => updateQuantity(pizzaCart.id,pizzaCart.count - 1)}
-                                    disabled={pizzaCart.count === 1}
-                                    className="me-2">
-                                    -
-                                </Button>
-                        </td>
-                        <td className='tdCarrito1'>
-                            {pizzaCart.count}
-                        </td>
-                        <td className='tdCarrito1'>
-                                <Button
-                                    variant="success"
-                                    size="sm"
-                                    onClick={() => updateQuantity(pizzaCart.id,pizzaCart.count + 1)}
-                                    className="me-2">
-                                    +
-                                </Button>
-                        </td>
-                        <td className='tdCarrito1'>
-                                <Button
-                                    variant="danger"
-                                    size="sm"
-                                    m="2"
-                                    onClick={() => removeFromCart(index)}>
-                                    Eliminar
-                                </Button>
-                        </td>
-                    </tr>
-                </table>
-                </li>
-            )
-            })}
-            <div className='text-center mt-5'>
-                <h3>Total : $ {total.toLocaleString('es-CL')}</h3>
-                <button className='btn btn-primary btn-lg mt-3'>Pagar </button>
-            </div>
+              <table className="d-flex align-items-center justify-content-center">
+                <tbody>
+                  <tr>
+                    <td className='tdCarrito'>
+                      <img className='fotopizzacarrito' src={pizzaCart.img} alt={pizzaCart.name} />
+                    </td>
+                    <td className='tdCarrito'>
+                      <h5>{pizzaCart.name}</h5>
+                    </td>
+                    <td className='tdCarrito'>
+                      <h6>$ {pizzaCart.price.toLocaleString('es-CL')}</h6>
+                    </td>
+                    <td className='tdCarrito1'>
+                      <Button
+                        variant="warning"
+                        size="sm"
+                        onClick={() => updateQuantity(pizzaCart.id, pizzaCart.count - 1)}
+                        disabled={pizzaCart.count === 1}
+                        className="me-2"
+                      >
+                        -
+                      </Button>
+                    </td>
+                    <td className='tdCarrito1'>
+                      {pizzaCart.quantity}
+                    </td>
+                    <td className='tdCarrito1'>
+                      <Button
+                        variant="success"
+                        size="sm"
+                        onClick={() => updateQuantity(pizzaCart.id, pizzaCart.count + 1)}
+                        className="me-2"
+                      >
+                        +
+                      </Button>
+                    </td>
+                    <td className='tdCarrito1'>
+                      <Button
+                        variant="danger"
+                        size="sm"
+                        onClick={() => removeFromCart(index)}
+                      >
+                        Eliminar
+                      </Button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </li>
+          ))}
+        </ul>
+      )}
+      <div className='text-center mt-5'>
+        <h3>Total: $ {TotalPriceC.toLocaleString('es-CL')}</h3>
+        <button className='btn btn-primary btn-lg mt-3'>Pagar</button>
+      </div>
     </div>
-  )
+  );
 }
 
-export default Cart
+export default Cart;
