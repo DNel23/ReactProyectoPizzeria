@@ -40,7 +40,8 @@ const CartProvider = ({ children }) => {
     const getTotalPrice = () => {
         return cartItems
             .reduce((total, item) => total + item.price * item.quantity, 0)
-            .toFixed(2);
+            .toFixed(0)
+
     };
 
     const updateQuantity = (id, newQuantity) => {

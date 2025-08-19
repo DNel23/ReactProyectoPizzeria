@@ -19,6 +19,7 @@ export const PizzasProvider = ({ children }) => {
     getPizzas();
   }, []);
 
+
   return (
     <PizzasContext.Provider value={{ pizzas }}>
       {children}

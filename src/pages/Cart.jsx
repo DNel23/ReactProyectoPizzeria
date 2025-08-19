@@ -1,11 +1,14 @@
 import React, { useContext } from 'react';
 import { Button } from "react-bootstrap";
 import { CartContext } from '../context/CartContext.jsx';
+import { formattedPrice } from '../assets/js/formatedPrice.js'
+import { UserContext } from '../context/userContext.jsx';
 
 const Cart = () => {
   const { cartItems, updateQuantity, removeFromCart, getTotalPrice } = useContext(CartContext);
-  const TotalPriceC=getTotalPrice()
-  
+  const TotalPriceC = getTotalPrice()
+  const {token} = useContext(UserContext)
+
   return (
     <div className='container mt-5'>
       <h2 className='text-center mb-4'>Detalle del pedido:</h2>
@@ -68,8 +71,8 @@ const Cart = () => {
         </ul>
       )}
       <div className='text-center mt-5'>
-        <h3>Total: $ {TotalPriceC.toLocaleString('es-CL')}</h3>
-        <button className='btn btn-primary btn-lg mt-3'>Pagar</button>
+        <h3>Total: $ {formattedPrice(TotalPriceC.toLocaleString('es-CL'))} </h3>
+        <button className='btn btn-primary btn-lg mt-3' disabled={ !token }>Pagar</button>
       </div>
     </div>
   );

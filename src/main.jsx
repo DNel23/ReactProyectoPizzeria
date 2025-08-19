@@ -5,17 +5,20 @@ import App from './App.jsx'
 import { BrowserRouter } from 'react-router-dom';
 import CartProvider from './context/CartContext.jsx';
 import { PizzasProvider } from './context/PizzasContext.jsx';
+import UserProvider, { UserContext } from './context/userContext.jsx';
 
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <PizzasProvider>
-      <CartProvider>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      </CartProvider>
-    </PizzasProvider>
+    <UserProvider>
+      <PizzasProvider>
+        <CartProvider>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </CartProvider>
+      </PizzasProvider>
+    </UserProvider>
   </React.StrictMode>
 )
